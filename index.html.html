@@ -1,0 +1,94 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>OSP — Manager Notes — Transfer Between Employees</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--p:#7A3EEA;--ink:rgba(0,0,0,.87);--soft:rgba(0,0,0,.6);--line:rgba(0,0,0,.12);--bg:#fff;--row:#f7f7f9;--pink:#e0457b}
+*{box-sizing:border-box}body{margin:0;font-family:Roboto,"Helvetica Neue",sans-serif;color:var(--ink);background:var(--bg);font-size:14px}
+.top{height:70px;display:flex;align-items:center;padding:0 28px 0 104px;border-bottom:1px solid var(--line);position:relative}
+.logo{position:absolute;left:104px;top:10px;line-height:1.05}.logo b{color:#1a56db;font-size:24px}.logo small{display:block;color:#f59e0b;font-size:11px;font-weight:500}.logo em{display:block;font-style:normal;font-size:12px;font-weight:700;color:#333;margin-top:2px}
+.meta{margin-left:auto;display:flex;gap:28px;align-items:center;color:#444}.av{width:48px;height:48px;border-radius:50%;background:#e9e9ee;display:flex;align-items:center;justify-content:center;font-weight:500;color:var(--p)}
+.rail{position:fixed;left:0;top:0;bottom:0;width:96px;border-right:1px solid var(--line);background:#fff}.rail i{display:block;width:28px;height:28px;margin:22px auto;border-radius:6px;background:#dfe3ea}.rail i.on{background:#ebe4fb;outline:8px solid #ebe4fb}
+.page{margin-left:96px;padding:18px 48px 40px 48px}.crumb{color:#555;font-size:12px}.crumb a{color:var(--p);text-decoration:none}
+.tabs{display:flex;gap:56px;margin:22px 0 8px;font-size:15px;letter-spacing:.3px;color:#808080}.tabs span{padding:10px 20px}.tabs .on{color:var(--p);border-bottom:2px solid var(--p)}
+h1{font-size:28px;margin:10px 0 48px}
+.sec{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}.sec h2{font-size:20px;font-weight:500;margin:0}
+.btn{background:var(--p);color:#fff;border:none;border-radius:8px;height:40px;padding:0 24px;font:500 14px Roboto;cursor:pointer}.btn.ghost{background:none;color:var(--p)}.btn:disabled{color:rgba(0,0,0,.26);background:none;cursor:default}
+table{width:100%;border-collapse:collapse;border:1px solid var(--line);border-radius:4px}th{font-weight:500;padding:16px 10px;text-align:center;font-size:14px;border-bottom:1px solid var(--line)}td{padding:12px 10px;text-align:center;border-bottom:1px solid var(--line)}tr:nth-child(even) td{background:var(--row)}
+.obtn{border:1px solid var(--line);background:#fff;border-radius:4px;padding:10px 20px;color:var(--p);font:400 14px Roboto}
+.chip{display:inline-block;background:#f3eefc;color:#5b2bc7;border-radius:4px;padding:2px 8px;font-size:12px;font-weight:500}
+.neg{color:#b42318;font-weight:500}.pos{color:#067647;font-weight:500}
+.sw{position:fixed;right:24px;bottom:24px;background:#111;color:#fff;border-radius:8px;padding:10px 14px;font-size:12.5px;display:flex;gap:10px;align-items:center;z-index:5}.sw button{background:#333;color:#fff;border:0;border-radius:6px;padding:6px 10px;cursor:pointer;font:12.5px Roboto}
+/* modal */
+.ov{position:fixed;inset:0;background:rgba(0,0,0,.32);display:none;align-items:flex-start;justify-content:center;padding-top:30px;z-index:10}.ov.on{display:flex}
+.dlg{width:650px;background:#fff;border-radius:4px;box-shadow:0 11px 15px rgba(0,0,0,.2),0 24px 38px rgba(0,0,0,.14);padding:0 0 14px}
+.dlg .bar{display:flex;gap:18px;padding:22px 30px 14px;border-bottom:1px solid var(--line)}.dlg .bar span{width:26px;height:26px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;color:var(--pink);font-size:22px;cursor:pointer}
+.dlg h3{text-align:center;font-size:20px;font-weight:500;margin:26px 0 24px}
+.f{padding:0 48px;margin-bottom:22px}.f label{display:block;font-size:16px;margin-bottom:8px}.f label b{font-weight:400}
+.in{position:relative;border:1px solid rgba(0,0,0,.38);border-radius:4px;height:46px;display:flex;align-items:center;padding:0 16px;font-size:14px;cursor:text}.in:focus-within,.in.open{border:2px solid var(--p)}.in input{border:0;outline:0;flex:1;font:14px Roboto;background:none}.in .car{margin-left:auto;color:rgba(0,0,0,.54)}
+.ta{height:80px;align-items:flex-start;padding-top:12px}.ta textarea{border:0;outline:0;flex:1;font:14px Roboto;resize:vertical;height:52px;background:none}
+.dd{position:absolute;left:0;right:0;top:48px;background:#fff;box-shadow:0 4px 12px rgba(0,0,0,.2);border-radius:4px;z-index:3;display:none}.dd.on{display:block}.dd .s{margin:10px 14px;border-bottom:1px solid var(--line);font-size:12px;color:var(--p)}.dd .s input{width:100%;border:0;outline:0;font:14px Roboto;padding:6px 0}.dd div.o{padding:12px 16px;cursor:pointer}.dd div.o:hover{background:#f0f0f0}.dd div.o small{display:block;color:var(--soft);font-size:12px}
+.hint{font-size:12.5px;color:var(--soft);margin-top:8px}.hint.err{color:#b42318}
+.sum{margin:0 48px 22px;border:1px dashed rgba(0,0,0,.25);border-radius:6px;padding:12px 16px;font-size:13.5px;line-height:1.6;background:#fafafa}
+.acts{display:flex;justify-content:flex-end;gap:18px;padding:12px 48px 0}
+.toast{position:fixed;left:50%;bottom:30px;transform:translateX(-50%);background:#323232;color:#fff;padding:12px 18px;border-radius:4px;font-size:14px;opacity:0;transition:.2s;z-index:20}.toast.on{opacity:1}
+.note{margin:0 0 18px;background:#f3eefc;border-left:4px solid var(--p);padding:10px 14px;font-size:13px;border-radius:4px}
+</style></head><body>
+<div class="rail"><i></i><i></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+<div class="top"><div class="logo"><b>maids.cc</b><small>+ nannies + visa services</small><em>Office Staff Payroll</em></div><div class="meta"><span>⏱ 12:32 AM</span><span>▦ November 11, 2026</span><span>Hi, Mohammad</span><div class="av">M.K</div><span>⎋</span></div></div>
+<div class="page">
+  <div class="note"><b>Mockup.</b> New Manager Note type <b>Transfer Between Employees</b>. Added from the <b>payer’s</b> page; one linked note shows on both employees’ Manager Notes (− on the payer, + on the receiver). Payroll Trustee only, no approval. Use the switch at the bottom-right to view the receiver’s page after saving.</div>
+  <div class="crumb">🏠 / <a href="#">Office Staff List</a> / Manager Notes</div>
+  <div class="tabs"><span>👤 Profile</span><span>📄 Documents</span><span>$ Payroll</span><span>▭ Payroll Payments</span><span>▭ Loans</span><span class="on">≡ Manager Notes</span><span>✕ Termination</span></div>
+  <h1 id="who">Nadia Farouk</h1>
+  <div class="sec"><h2>Manager Notes</h2><button class="btn" id="addBtn" onclick="openDlg()">+ Add Note</button></div>
+  <table><thead><tr><th>Actions</th><th>Note Type</th><th>Amount</th><th>Note Reason</th><th>Reason</th><th>Note Date</th><th>Manager</th><th>Created By</th></tr></thead><tbody id="rows"></tbody></table>
+</div>
+<div class="sw">Viewing: <b id="swName">Nadia Farouk (payer)</b> <button onclick="switchTo('payer')">Payer</button><button onclick="switchTo('receiver')">Receiver</button></div>
+
+<div class="ov" id="ov"><div class="dlg">
+  <div class="bar"><span onclick="closeDlg()">✕</span><span style="color:var(--p);font-size:16px">⤢</span><span style="color:var(--pink)">▮</span></div>
+  <h3>Add Note</h3>
+  <div class="f"><label>Note Type <b>*</b></label><div class="in" id="typeIn" onclick="toggle('typeDd')"><span id="typeVal" style="flex:1"></span><span class="car">▾</span>
+    <div class="dd" id="typeDd"><div class="s">search...<input placeholder=""></div>
+      <div class="o" onclick="pickType('Salary Raise',event)">Salary Raise</div><div class="o" onclick="pickType('Deduction',event)">Deduction</div><div class="o" onclick="pickType('Salary Reduction',event)">Salary Reduction</div><div class="o" onclick="pickType('Bonus',event)">Bonus</div><div class="o" onclick="pickType('Transfer Between Employees',event)">Transfer Between Employees <small>Payroll Trustee only · no approval</small></div>
+    </div></div></div>
+  <div id="xfer" style="display:none">
+    <div class="f"><label>To employee <b>*</b></label><div class="in" id="toIn" onclick="toggle('toDd')"><input id="toInput" placeholder="Type 3 letters of the name…" oninput="filterTo()"><span class="car">▾</span>
+      <div class="dd" id="toDd"></div></div><div class="hint">The employee who receives the amount. Nadia Farouk (this page) is the one it is deducted from.</div></div>
+  </div>
+  <div class="f"><label>Amount <b>*</b></label><div class="in"><input id="amt" type="number" min="1" oninput="recalc()"></div><div class="hint" id="amtHint"></div></div>
+  <div class="f"><label>Note Date <b>*</b></label><div class="in"><input id="dt" value="2026-11-11"><span class="car">📅</span></div></div>
+  <div class="f"><label>Note Reason <b>*</b></label><div class="in ta"><textarea id="rsn"></textarea></div></div>
+  <div class="sum" id="sum" style="display:none"></div>
+  <div class="acts"><button class="btn ghost" onclick="closeDlg()">Cancel</button><button class="btn ghost" id="saveBtn" disabled onclick="save()">Save</button></div>
+</div></div>
+<div class="toast" id="toast"></div>
+
+<script>
+const PAYER={name:'Nadia Farouk',netPay:9400};
+const STAFF=[{n:'Youssef Karam',t:'Process Improvement Leader'},{n:'Maya Sleiman',t:'Software Engineer'},{n:'Hani Rizk',t:'AI Engineer'},{n:'Dana Khoury',t:'Backend Engineer'},{n:'Rami Tabet',t:'Business Analyst'},{n:'Lina Aoun',t:'QA Engineer'}];
+const base={payer:[['Bonus','938','815917dc162058cb248a','Bonus','2018-06-26','--','AnasF'],['Bonus','552','ec99461e96e942d03835','Bonus','2021-04-06','Samir Haddad','guest'],['Salary Raise','585','8e18003525753c1be3f7','','2021-05-24','Samir Haddad','Jad'],['Bonus','211','260dbf8f107ee006121f','Equipments','2022-09-28','Samir Haddad','Jad']],
+            receiver:[['Bonus','300','7c1f0a9e2b3d4c5e6f70','Bonus','2024-03-12','Samir Haddad','guest'],['Deduction','120','9a8b7c6d5e4f30211234','','2025-01-08','Samir Haddad','Jad']]};
+let view='payer', xfers=[], type='', to=null;
+function render(){const who=view==='payer'?PAYER.name:(to?to.n:'Youssef Karam');document.getElementById('who').textContent=who;document.getElementById('swName').textContent=who+(view==='payer'?' (payer)':' (receiver)');document.getElementById('addBtn').style.display=view==='payer'?'':'none';
+  const rows=[...base[view]].map(r=>({cells:r}));
+  xfers.forEach(x=>{ if(view==='payer') rows.push({x:true,cells:['Transfer Between Employees','<span class="neg">− '+x.amt+'</span>',x.rsn,'<span class="chip">To: '+x.to+'</span>',x.dt,'--','Cinda Sekareah']});
+    else if(x.to===who) rows.push({x:true,cells:['Transfer Between Employees','<span class="pos">+ '+x.amt+'</span>',x.rsn,'<span class="chip">From: '+PAYER.name+'</span>',x.dt,'--','Cinda Sekareah']}); });
+  document.getElementById('rows').innerHTML=rows.map(r=>'<tr><td><button class="obtn">Edit Note Reason</button></td>'+r.cells.map(c=>'<td>'+c+'</td>').join('')+'</tr>').join('');}
+function switchTo(v){view=v;render()}
+function openDlg(){document.getElementById('ov').classList.add('on')}function closeDlg(){document.getElementById('ov').classList.remove('on');reset()}
+function reset(){type='';to=null;document.getElementById('typeVal').textContent='';document.getElementById('xfer').style.display='none';document.getElementById('toInput').value='';document.getElementById('amt').value='';document.getElementById('rsn').value='';document.getElementById('sum').style.display='none';document.getElementById('amtHint').textContent='';recalc()}
+function toggle(id){document.querySelectorAll('.dd').forEach(d=>{if(d.id!==id)d.classList.remove('on')});const d=document.getElementById(id);d.classList.toggle('on');if(id==='toDd')filterTo()}
+function pickType(t,e){e.stopPropagation();type=t;document.getElementById('typeVal').textContent=t;document.getElementById('typeDd').classList.remove('on');document.getElementById('xfer').style.display=t==='Transfer Between Employees'?'':'none';recalc()}
+function filterTo(){const q=document.getElementById('toInput').value.trim().toLowerCase();const dd=document.getElementById('toDd');const list=q.length>=3?STAFF.filter(s=>s.n.toLowerCase().includes(q)):[];dd.innerHTML=list.map(s=>'<div class="o" onclick="pickTo(\''+s.n+'\',event)">'+s.n+'<small>'+s.t+'</small></div>').join('')||'<div class="o" style="color:var(--soft)">'+(q.length<3?'Type at least 3 letters':'No office staff match')+'</div>';dd.classList.add('on');to=null;recalc()}
+function pickTo(n,e){e.stopPropagation();to=STAFF.find(s=>s.n===n);document.getElementById('toInput').value=n;document.getElementById('toDd').classList.remove('on');recalc()}
+function recalc(){const amt=parseFloat(document.getElementById('amt').value)||0;const h=document.getElementById('amtHint');const s=document.getElementById('sum');let ok=false;
+  if(type==='Transfer Between Employees'){ const over=amt>PAYER.netPay; h.textContent=over?'Exceeds '+PAYER.name+'’s net pay this month (AED '+PAYER.netPay.toLocaleString()+') — the payer’s pay cannot go below zero.':'Payer’s net pay this month: AED '+PAYER.netPay.toLocaleString()+'.'; h.className='hint'+(over?' err':'');
+    if(to&&amt>0){s.style.display='';s.innerHTML='<b>What this does</b><br>− AED '+amt.toLocaleString()+' from <b>'+PAYER.name+'</b> (this page) · + AED '+amt.toLocaleString()+' to <b>'+to.n+'</b><br>Same payroll month for both. No approval. Not a cost: ignored in the Department Cost Table.'} else s.style.display='none';
+    ok=!!to&&amt>0&&!over; } else { h.textContent=''; s.style.display='none'; ok=!!type&&amt>0; }
+  document.getElementById('saveBtn').disabled=!ok;}
+function save(){const amt=parseFloat(document.getElementById('amt').value);if(type==='Transfer Between Employees'){xfers.push({to:to.n,amt:amt.toLocaleString(),dt:document.getElementById('dt').value,rsn:document.getElementById('rsn').value||'—'});toast('Transfer of AED '+amt.toLocaleString()+' from '+PAYER.name+' to '+to.n+' saved — shown on both Manager Notes');}else toast(type+' note saved');closeDlg();render()}
+function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('on');setTimeout(()=>t.classList.remove('on'),2600)}
+document.addEventListener('click',e=>{if(!e.target.closest('.in'))document.querySelectorAll('.dd').forEach(d=>d.classList.remove('on'))});
+render();
+</script></body></html>
